@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear nuevo animal</title>
+</head>
+<body>
+<h1>Crear Nuevo Animal</h1>
+
+<form th:action="@{/animals}" th:object="${animal}" method="post">
+
+    <label>Nombre:</label><br>
+    <input type="text" th:field="*{nombre}" /><br>
+    <span style="color:red;" th:errors="*{nombre}" th:if="${#fields.hasErrors('nombre')}"></span><br><br>
+
+    <label>Edad media:</label><br>
+    <input type="number" th:field="*{vidaMedia}" /><br>
+    <span style="color:red;" th:errors="*{vidaMedia}" th:if="${#fields.hasErrors('vidaMedia')}"></span><br><br>
+
+    <label>
+        <input type="checkbox" th:field="*{extinto}" /> Marcar si esta extinto
+    </label><br><br>
+
+    <button type="submit">Crear</button>
+</form>
+
+<br>
+<a th:href="@{/animals}">Volver al listado</a>
+</body>
+</html>

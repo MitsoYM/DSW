@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animales</title>
+</head>
+<body>
+<h1>Listado de Animales</h1>
+
+<a th:href="@{/animals/new}">Crear Nuevo Animal</a>
+<br><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Edad Media</th>
+        <th>Extinto</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animal : ${animals}">
+        <td th:text="${animal.id}"></td>
+        <td th:text="${animal.nombre}"></td>
+        <td th:text="${animal.vidaMedia}"></td>
+        <td th:text="${animal.extinto ? 'Sí' : 'No'}"></td>
+        <td>
+            <form th:action="@{/animals/{id}(id=${animal.id})}" method="get" style="display:inline;">
+                <button type="submit">Detalles</button>
+            </form>
+
+            <form th:action="@{/animals/{id}/edit(id=${animal.id})}" method="get" style="display:inline;">
+                <button type="submit">Editar</button>
+            </form>
+
+            <form th:action="@{/animals/{id}/delete(id=${animal.id})}" method="get" style="display:inline;">
+                <button type="submit">Borrar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

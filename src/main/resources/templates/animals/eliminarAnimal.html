@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar animal</title>
+</head>
+<body>
+    <h1>¿Realmente deseas eliminar este animal?</h1>
+    <li>ID:<span th:text="${animal.id}"></span></li>
+    <li>Nombre: <span th:text="${animal.nombre}"></span></li>
+    <li>Vida media: <span th:text="${animal.vidaMedia}"></span> años</li>
+    <li>Extinto: <span th:text="${animal.extinto ? 'Sí' : 'No'}"></span></li>
+    <form th:action="@{/animals/{id}/delete(id=${animal.id})}" method="post">
+        <button type="submit">Sí, eliminar</button>
+    </form>
+
+    <br>
+    <a th:href="@{/animals}">Cancelar / Volver al listado</a>
+    <br>
+    <a th:href="@{/animals}">Volver al listado</a>
+</body>
+</html>

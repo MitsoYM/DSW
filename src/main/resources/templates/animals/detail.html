@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Animal</title>
+</head>
+<body>
+<h1>Detalles</h1>
+
+<li>ID:<span th:text="${animal.id}"></span></li>
+<li>Nombre: <span th:text="${animal.nombre}"></span></li>
+<li>Vida media: <span th:text="${animal.vidaMedia}"></span> años</li>
+<li>Extinto: <span th:text="${animal.extinto ? 'Sí' : 'No'}"></span></li>
+
+<br>
+<a th:href="@{/animals/{id}/edit(id=${animal.id})}">Editar este animal</a> |
+<a th:href="@{/animals}">Volver al listado</a>
+</body>
+</html>
