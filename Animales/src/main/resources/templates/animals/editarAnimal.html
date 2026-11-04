@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar animal</title>
+</head>
+<body>
+<h1>Editar animal</h1>
+<form th:action="@{/animals}" th:object="${animal}" method="post">
+
+    <label>Nombre:</label><br>
+    <input type="text" th:field="*{animal.nombre}" /><br>
+    <span style="color:red;" th:errors="*{animal.nombre}" th:if="${#fields.hasErrors('nombre')}"></span><br><br>
+
+    <label>Edad media:</label><br>
+    <input type="number" th:field="*{animal.vidaMedia}" /><br>
+    <span style="color:red;" th:errors="*{animal.vidaMedia}" th:if="${#fields.hasErrors('vidaMedia')}"></span><br><br>
+</form>
+<a th:href="@{/animals}">Volver al listado</a>
+</body>
+</html>
