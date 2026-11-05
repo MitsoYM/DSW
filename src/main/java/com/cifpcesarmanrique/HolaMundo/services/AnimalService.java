@@ -1,57 +1,38 @@
 package com.cifpcesarmanrique.HolaMundo.services;
 
 import com.cifpcesarmanrique.HolaMundo.models.Animal;
+import com.cifpcesarmanrique.HolaMundo.repositorio.AnimalRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Optional;
+
 @Service
 public class AnimalService {
-    private  final List<Animal> animals = new ArrayList<>();
+    private  final AnimalRepositorio repo;
 
-    public AnimalService()
+    public AnimalService(AnimalRepositorio repo)
     {
-        animals.add(new Animal(1, "Dodo",30, true));
-        animals.add(new Animal(2, "Tortuga", 100, false));
-        animals.add(new Animal(3, "Lince", 15, false));
+        this.repo = repo;
     }
 
     public List<Animal> findAll()
     {
-        return animals;
+        return repo.findAll();
     }
 
     public Animal findById(Integer id)
     {
-        return animals.stream()
-                .filter(a -> a.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return repo.findById(id).orElse(null);
     }
 
     public void save(Animal animal)
     {
-        if (animal.getId() == null)
-        {
-            int nextId = animals.stream()
-                    .mapToInt(Animal::getId)
-                    .max()
-                    .orElse(0) + 1;
-            animal.setId(nextId);
-            animals.add(animal);
-        } else {
-            Animal existing = findById(animal.getId());
-            if (existing != null)
-            {
-                existing.setNombre(animal.getNombre());
-                existing.setVidaMedia(animal.getVidaMedia());
-                existing.setExtinto(animal.isExtinto());
-            }
-        }
+        repo.save(animal);
     }
 
     public void delete(Integer id)
     {
-        boolean removeIf = animals.removeIf(a -> a.getId().equals(id));
+        repo.deleteById(id);
     }
 }
