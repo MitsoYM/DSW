@@ -8,7 +8,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "animals")
 public class Animal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
     private int vidaMedia;
     private boolean extinto;
