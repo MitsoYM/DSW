@@ -2,7 +2,11 @@ package com.cifpcesarmanrique.HolaMundo.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import org.springframework.web.bind.annotation.GetMapping;
+import jakarta.persistence.*;
 
+
+@Entity
+@Table(name = "animals")
 public class Animal {
     private Integer id;
     private String nombre;
