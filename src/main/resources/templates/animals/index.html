@@ -2,45 +2,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Animales</title>
+    <title>Listado de Animales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Listado de Animales</h1>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-primary px-3 mb-4">
+    <span class="navbar-brand mb-0 h1">Animalia</span>
+</nav>
 
-<a th:href="@{/animals/new}">Crear Nuevo Animal</a>
-<br><br>
+<div class="container">
+    <h2 class="mb-3">Listado de Animales</h2>
+    <p>
+        <a th:href="@{/animals/nuevo}" class="text-primary text-decoration-underline">Crear Nuevo Animal</a>
+    </p>
 
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Edad Media</th>
-        <th>Extinto</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="animal : ${animals}">
-        <td th:text="${animal.id}"></td>
-        <td th:text="${animal.nombre}"></td>
-        <td th:text="${animal.vidaMedia}"></td>
-        <td th:text="${animal.extinto ? 'Sí' : 'No'}"></td>
-        <td>
-            <form th:action="@{/animals/{id}(id=${animal.id})}" method="get" style="display:inline;">
-                <button type="submit">Detalles</button>
-            </form>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th class="py-3 ps-3">Id</th>
+                    <th class="py-3">Nombre</th>
+                    <th class="py-3">Edad Media</th>
+                    <th class="py-3">Extinto</th>
+                    <th class="py-3 text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="animal : ${animals}">
+                    <td class="ps-3" th:text="${animal.id}">1</td>
+                    <td th:text="${animal.nombre}">Dodo</td>
+                    <td th:text="${animal.vidaMedia}">8</td>
+                    <td th:text="${animal.extinto ? 'Si' : 'No'}">Si</td>
+                    <td class="text-center">
+                        <a th:href="@{/animals/detalles/{id}(id=${animal.id})}" class="btn btn-outline-success btn-sm px-3">Detalles</a>
 
-            <form th:action="@{/animals/{id}/edit(id=${animal.id})}" method="get" style="display:inline;">
-                <button type="submit">Editar</button>
-            </form>
+                        <a th:href="@{/animals/editar/{id}(id=${animal.id})}" class="btn btn-outline-warning btn-sm px-3 text-dark">Editar</a>
+                        <a th:href="@{/animals/eliminar/{id}(id=${animal.id})}" class="btn btn-outline-danger btn-sm px-3">Borrar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-            <form th:action="@{/animals/{id}/delete(id=${animal.id})}" method="get" style="display:inline;">
-                <button type="submit">Borrar</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+</div>
+
 </body>
 </html>
